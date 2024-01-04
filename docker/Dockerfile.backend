@@ -1,0 +1,16 @@
+FROM eclipse-temurin:17-jdk-focal
+
+WORKDIR /app
+
+ENV SPRING_DATASOURCE_URL=jdbc:mysql://db-service:3306/game?useSSL=false&useUnicode=yes&characterEncoding=UTF-8&allowPublicKeyRetrieval=true&serverTimezone=UTC
+ENV SPRING_DATASOURCE_USERNAME=root
+ENV SPRING_DATASOURCE_PASSWORD=Pa\$\$w0rd
+
+COPY backend/.mvn/ .mvn
+COPY backend/mvnw backend/pom.xml ./
+COPY backend/src/. src
+
+RUN ./mvnw dependency:go-offline
+
+CMD ["./mvnw", "spring-boot:run"]
+

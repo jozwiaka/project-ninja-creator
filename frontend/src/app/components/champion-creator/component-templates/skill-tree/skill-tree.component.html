@@ -1,0 +1,46 @@
+<div class="container-flex-cols container-100vh">
+  <div class=" container-flex-rows container-100vh">
+    <div class="container-wrap">
+      <div class="skill-tree" *ngFor="let tree of trees">
+        <div class="tree-name">{{ tree.name }}</div>
+
+        <div class="tier-row" *ngFor="let tier of tierArray()">
+          <div *ngFor="let skill of getSkillsByTier(tree, tier)">
+            <div class="skill-item">
+              <button (click)="addSkillPoint(skill)" (contextmenu)="removeSkillPoint($event, skill)"
+                [disabled]="tierRequirementFulfilled(tree, skill)" class="button-img">
+
+                <div class="img-container">
+                  <img class="img-small" [src]="skill.imageUrl" [alt]="skill.name"
+                    [class.disabled]="tierRequirementFulfilled(tree, skill)" (mouseenter)="select(skill)"
+                    (mouseleave)="unselect()">
+                </div>
+
+              </button>
+              <p>
+                {{getPointsOfChampionSkill(skill)}} of {{skill.maxPoints}}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="tier-row bottom-element centre">
+          <button (click)="addTreePoint(tree)"
+            [disabled]="getPointsOfChampionTree(tree)===tree.tier3 || !champion.skillPoints"
+            class="btn btn-primary">+</button>
+          <div style="margin:0px 5px">
+            {{getPointsOfChampionTree(tree)}} of {{tree.tier3}}
+          </div>
+          <button (click)="removeTreePoint(tree)" [ngClass]="{
+              invisible:!getPointsOfChampionTree(tree) || !checkIfCanRemoveTreePoint(tree)
+            }" class="btn btn-primary">-</button>
+        </div>
+      </div>
+    </div>
+    <div class="bottom-element">
+      <button (click)="reset()" class="btn btn-primary">Reset</button>
+    </div>
+  </div>
+
+  <!-- <app-details [skill]="selected" [champion]="champion"></app-details> -->
+  <app-details-preview [skill]="selected" [champion]="champion"></app-details-preview>
+</div>

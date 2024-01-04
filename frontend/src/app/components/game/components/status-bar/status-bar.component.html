@@ -1,0 +1,61 @@
+<div class="container-zero">
+  <p style="margin-bottom: 10px;">{{champion.name}}</p>
+  <div class="bar-container">
+    <div class="bar health" [style.width.%]="calculatePercentage(champion.health,champion.maxHealth)"></div>
+  </div>
+  <div class="container-flex-cols">
+    {{champion.health}} / {{champion.maxHealth}}
+    <div *ngIf="dmg" class="dmg">
+      [-{{dmg}}]
+    </div>
+  </div>
+  <div class="bar-container">
+    <div class="bar chakra" [style.width.%]="calculatePercentage(champion.chakra,champion.maxChakra)"></div>
+  </div>
+  {{champion.chakra}} (+{{champion.chakraRegen}}) / {{champion.maxChakra}}
+  <ng-container *ngIf="champion.armor>0">
+    <div class="bar-container">
+      <div class="bar armor" [style.width.%]="calculatePercentage(champion.armor,champion.maxArmor)"></div>
+    </div>
+    <div class="container-flex-cols">
+      {{champion.armor}} / {{champion.maxArmor}}
+      <div *ngIf="dmgArmor" class="dmg">
+        [-{{dmgArmor}}]
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="champion.hyuugaStacks>0">
+    <div class="bar-container">
+      <div class="bar hyuuga-stacks"
+        [style.width.%]="calculatePercentage(champion.hyuugaStacks,champion.hyuugaStacksMax)">
+      </div>
+    </div>
+    {{champion.hyuugaStacks}} / {{champion.hyuugaStacksMax}}
+  </ng-container>
+
+  <div class="container-flex-cols" style="margin-top:20px">
+    <div class="champion-stats">
+      <div class="stat-group">
+        <ul>
+          <li>TP: <span class="stat-value">{{champion.taijutsuPower}}</span></li>
+          <li>NP: <span class="stat-value">{{champion.ninjutsuPower}}</span></li>
+        </ul>
+      </div>
+      <div class="stat-group">
+        <ul>
+          <li>AS: <span class="stat-value">{{champion.attackSpeed}}</span></li>
+          <li>MS: <span class="stat-value">{{champion.movementSpeed}}</span></li>
+        </ul>
+      </div>
+      <div class="stat-group">
+        <ul>
+          <li>TR: <span class="stat-value">{{champion.taijutsuResistance}}
+              ({{champion.taijutsuDmgReductionPerc}}%)</span></li>
+          <li>NR: <span class="stat-value">{{champion.ninjutsuResistance}}
+              ({{champion.ninjutsuDmgReductionPerc}}%)</span></li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,76 @@
+.container-game-creator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.custom-dropdown {
+  position: relative;
+}
+
+.dropdown-button {
+  display: inline-block;
+  padding: 10px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background-color: #f5f5f5;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+  width: 150px;
+}
+
+.dropdown-button:hover {
+  background-color: #ebebeb;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: none;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  width: 150px;
+  max-height: 200px; /* Set the desired maximum height */
+  overflow-y: auto; /* Enable vertical scrolling */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+}
+
+.dropdown-list li {
+  padding: 10px;
+  color: #333;
+  transition: background-color 0.3s, color 0.3s;
+  cursor: pointer;
+}
+
+.dropdown-list .add {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.dropdown-list li:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.dropdown-list button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  color: #333;
+  transition: color 0.3s;
+}
+
+.dropdown-list button:hover {
+  color: #007bff;
+}
+
+.custom-dropdown .dropdown-list {
+  display: block;
+}

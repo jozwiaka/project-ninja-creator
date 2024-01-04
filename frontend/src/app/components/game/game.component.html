@@ -1,0 +1,175 @@
+<div *ngIf="initialized">
+  <div>
+    <button class="btn btn-primary" (click)="return()">Return</button>
+  </div>
+  <div class="container-padding">
+    <div class="container-flex-cols container-100vh">
+
+      <div>
+        <app-status-bar [champion]="chosenChampion"></app-status-bar>
+        <div class="table-container-vertical" style="margin-top: 10px;">
+          <table class="scrollable-table-vertical">
+            <tbody>
+              <tr *ngFor="let row of Utils.inRange(skillsListSize.height)">
+                <td *ngFor="let col of Utils.inRange(skillsListSize.width)">
+                  <ng-container *ngIf="getSkillFromList(chosenChampion, row, col) as skill">
+                    <div class="image-container">
+                      <img class="clickable img-small" [src]="skill.imageUrl" [class.img-clicked]="skill.status.clicked"
+                        [class.img-hovered]="skill.status.hovered" [class.transparent]="skill.cooldownTimer"
+                        (mouseenter)="skill.status.hovered = true" (mouseleave)="skill.status.hovered = false"
+                        (click)="handleChampionSkill(skill)">
+                      <div class="cooldown-timer" *ngIf="skill.cooldownTimer">{{ skill.cooldownTimer }}</div>
+                    </div>
+
+                  </ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-container-vertical-passives" style="margin-top: 10px;">
+          <table class="scrollable-table-vertical">
+            <tbody>
+              <tr *ngFor="let row of Utils.inRange(passivesListSize.height)">
+                <td *ngFor="let col of Utils.inRange(passivesListSize.width)">
+                  <ng-container *ngIf="getPassiveFromList(chosenChampion, row, col) as skill">
+                    <div class="image-container">
+                      <img class="clickable img-small" [src]="skill.imageUrl" [class.img-clicked]="skill.status.clicked"
+                        [class.img-hovered]="skill.status.hovered" [class.transparent]="skill.cooldownTimer"
+                        (mouseenter)="skill.status.hovered = true" (mouseleave)="skill.status.hovered = false"
+                        (click)="handleChampionSkill(skill)">
+                      <div class="cooldown-timer" *ngIf="skill.cooldownTimer">{{ skill.cooldownTimer }}</div>
+                    </div>
+
+                  </ng-container>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <div class="container-flex-rows container-100vh">
+        <app-details [skill]="selectedSkill" [champion]="chosenChampion"></app-details>
+
+      </div>
+
+      <div class="container-flex-rows">
+        <div class="grid-container" style="margin-top:0px">
+          <div class="grid" [style.--rows-number]="grid.size.height" [style.--columns-number]="grid.size.width">
+            <div class="row" *ngFor="let row of grid.tiles">
+              <div *ngFor="let tile of row" class="tile" [ngClass]="{
+              selected: tile.status.selected,
+          occupied: tile.status.occupied,
+          champion: tile.champion,
+          player1: players[0] && (tile.champion === players[0] || tile.champion?.owner === players[0]),
+          player2: players[1] && (tile.champion === players[1] || tile.champion?.owner === players[1]),
+          player3: players[2] && (tile.champion === players[2] || tile.champion?.owner === players[2]),
+          player4: players[3] && (tile.champion === players[3] || tile.champion?.owner === players[3]),
+          chosen:tile.champion===chosenChampion,
+          active: tile.champion===activePlayer,
+          preview:tile.champion?.status?.preview,
+          rock:tile.obstacle.rock,
+          water:tile.obstacle.water,
+          targetable:tile.status.targetable,
+          invisiblee:tile.champion?.status?.invisible,
+          mirror:tile.champion?.status?.mirror
+        }" (click)="selectTile(tile)"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="container-flex-cols">
+          <div class="table-container-horizontal" style="margin-left:10px" #skillHistory>
+            <table class="scrollable-table-horizontal">
+              <tbody>
+                <tr>
+                  <td *ngFor="let skill of chosenChampion.skillHistory">
+                    <img class="img-small" [src]="skill.imageUrl" [ngClass]="{
+                  transparent: skill.status.loading
+                }">
+                  </td>
+                  <td *ngFor="let i of Utils.inRange(chosenChampion.attackSpeed-chosenChampion.skillHistory.length)">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="container-flex-rows cell">
+            <ng-container *ngIf="!checkIfCanUseSkill()">
+              <div class="btn-cast-placeholder">
+
+              </div>
+            </ng-container>
+            <ng-container *ngIf="checkIfCanUseSkill()">
+              <div>
+                <button [disabled]="!checkIfTargetIsValid()" (click)="useSkill()" class="btn btn-success btn-cast">
+                  Use
+                  <ng-container *ngIf="selectedSkill!.usages">
+                    <ng-container *ngIf="selectedSkill!.usages > 0">
+                      ({{selectedSkill!.usages}})
+                    </ng-container>
+                  </ng-container>
+                </button>
+              </div>
+            </ng-container>
+            <div>
+              {{chosenChampion.skillHistory.length}} / {{chosenChampion.attackSpeed}}
+            </div>
+            <div>
+              <button class="btn btn-primary btn-end" (click)="end()">End</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="container-right-panel">
+          <ng-container *ngIf="chosenEnemy">
+            <app-status-bar [champion]="chosenEnemy" [dmg]="chosenEnemy.dmgOnSelf"
+              [dmgArmor]="chosenEnemy.dmgOnSelfArmor"></app-status-bar>
+            <div class="table-container-vertical" style="margin-top: 10px;">
+              <table class="scrollable-table-vertical">
+                <tbody>
+                  <tr *ngFor="let row of Utils.inRange(skillsListSize.height)">
+                    <td *ngFor="let col of Utils.inRange(skillsListSize.width)">
+                      <ng-container *ngIf="getSkillFromList(chosenEnemy, row, col) as skill">
+                        <div class="image-container">
+                          <img class="clickable img-small disabled-enemy-skill" [src]="skill.imageUrl"
+                            [class.img-clicked]="skill.status.clicked" [class.img-hovered]="skill.status.hovered"
+                            [class.transparent]="skill.cooldownTimer">
+                          <div class="cooldown-timer" *ngIf="skill.cooldownTimer">{{ skill.cooldownTimer }}</div>
+                        </div>
+                      </ng-container>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="table-container-vertical-passives" style="margin-top: 10px;">
+              <table class="scrollable-table-vertical">
+                <tbody>
+                  <tr *ngFor="let row of Utils.inRange(passivesListSize.height)">
+                    <td *ngFor="let col of Utils.inRange(passivesListSize.width)">
+                      <ng-container *ngIf="getPassiveFromList(chosenEnemy, row, col) as skill">
+                        <div class="image-container">
+                          <img class="clickable img-small disabled-enemy-skill" [src]="skill.imageUrl"
+                            [class.img-clicked]="skill.status.clicked" [class.img-hovered]="skill.status.hovered"
+                            [class.transparent]="skill.cooldownTimer">
+                          <div class="cooldown-timer" *ngIf="skill.cooldownTimer">{{ skill.cooldownTimer }}</div>
+                        </div>
+                      </ng-container>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-container>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>

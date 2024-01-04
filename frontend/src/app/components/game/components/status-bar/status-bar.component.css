@@ -1,0 +1,53 @@
+.bar-container {
+  width: 300px;
+  height: 20px;
+  background-color: #232323;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid white;
+}
+
+.bar {
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.bar.health {
+  background-color: green;
+}
+
+.bar.chakra {
+  background-color: blue;
+}
+
+.bar.armor {
+  background-color: lightgray;
+}
+
+.bar.hyuuga-stacks {
+  background-color: lightblue;
+}
+
+.champion-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.stat-group {
+  margin-right: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  margin-bottom: 10px;
+}
+
+.dmg {
+  color: rgb(255, 135, 135);
+  margin-left: 5px;
+}

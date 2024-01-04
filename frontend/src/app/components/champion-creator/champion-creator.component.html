@@ -1,0 +1,30 @@
+<div class="container-flex-cols container-100vh">
+  <div class="sidebar">
+    <button class="btn btn-primary" (click)="return()">Return</button>
+    <br><br>
+    <ul>
+      <li>
+        <b>{{champion.name}}</b>
+      </li>
+      <li (click)="showAttributes()">Attributes ({{sharedDataService.champion.attributePoints}})</li>
+      <li (click)="showSkills()">Skills ({{sharedDataService.champion.skillPoints}})</li>
+    </ul>
+  </div>
+  <div class="content-area" style="margin-right:200px">
+    <ng-container *ngIf="currentComponent">
+      <ng-container *ngTemplateOutlet="currentComponent"></ng-container>
+    </ng-container>
+
+    <ng-template #attributesTemplate>
+      <app-attributes></app-attributes>
+    </ng-template>
+
+    <ng-template #skillTreeTemplate>
+      <app-skill-tree></app-skill-tree>
+    </ng-template>
+
+  </div>
+  <div class="container-submit">
+    <button (click)="save()" class="btn btn-primary submit-item">Save</button>
+  </div>
+</div>

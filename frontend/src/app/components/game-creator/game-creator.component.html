@@ -1,0 +1,68 @@
+<div
+  class="background"
+  style="
+    background-image: url('assets/imgs-background/background_haku_zabuza.jpg');
+  "
+>
+  <div>
+    <button class="btn btn-primary" (click)="return()">Return</button>
+  </div>
+  <div class="container-game-creator">
+    <div class="container-content"></div>
+    <div class="flex-column">
+      <table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Champion</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let row of rows; let i = index">
+            <td>
+              <div class="custom-dropdown">
+                <div class="dropdown-button" (click)="toggleChampions(i)">
+                  {{ row.champion?.name }}
+                </div>
+                <ul class="dropdown-list" *ngIf="row.showChampions">
+                  <!-- <li *ngIf="row.champions.length>0" class="add" (click)="alterChampion(i)">
+                  +
+                </li> -->
+                  <li
+                    *ngFor="let champion of row.champions"
+                    (click)="selectChampion(i, champion)"
+                  >
+                    {{ champion.name }}
+                  </li>
+                </ul>
+              </div>
+            </td>
+            <td>
+              <button (click)="removeRow(i)" class="btn btn-lg btn-danger">
+                x
+              </button>
+            </td>
+          </tr>
+
+          <tr *ngIf="rows.length < 4">
+            <td>
+              <button (click)="addRow()" class="btn btn-lg btn-success">
+                +
+              </button>
+            </td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="container-submit">
+        <button
+          [disabled]="disableStartButton()"
+          (click)="start()"
+          class="btn btn-primary submit-item"
+        >
+          Start
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

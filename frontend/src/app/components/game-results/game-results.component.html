@@ -1,0 +1,7 @@
+<ul>
+  <li *ngFor="let champion of sharedDataService.champions">
+    {{champion.name}} = {{champion.rankingPoints}}
+  </li>
+</ul>
+
+<a routerLink="/menu" class="btn btn-primary btn-lg mb-3">Menu</a>

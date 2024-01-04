@@ -1,0 +1,81 @@
+#details {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  justify-content: flex-start;
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 597px;
+  max-height: 597px;
+  border: solid white 1px;
+  /* border-radius: 8px; */
+  /* padding-top: 10px;
+  padding-bottom: 10px; */
+  padding: 0;
+  margin-left: 10px;
+  background-color: #232323;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* font-family: Arial, sans-serif; */
+  text-align: center;
+}
+
+#details img {
+  /* max-width: 100%;
+  max-height: 100%; */
+  border-left: solid 1px white;
+  border-right: solid 1px white;
+  /* border-radius: 4px; */
+  /* margin-bottom: 10px; */
+}
+
+#details h3 {
+  font-size: 16px;
+  padding: 0px;
+  margin: 0px;
+}
+
+#details .description {
+  text-align: left;
+  font-size: 16px;
+  padding: 25px;
+  text-align: justify;
+}
+
+#details .description-item {
+  word-wrap: break-word;
+  margin: 0px;
+  padding: 0px;
+  padding-bottom: 25px;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  margin: 0px;
+  padding: 0px;
+}
+
+.skill-info {
+  display: flex;
+  justify-content: space-between;
+  margin: 0px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.chakra-cost {
+  order: 1;
+}
+.cooldown {
+  order: 2;
+}
+.wait {
+  order: 3;
+}
+.range {
+  order: 4;
+}

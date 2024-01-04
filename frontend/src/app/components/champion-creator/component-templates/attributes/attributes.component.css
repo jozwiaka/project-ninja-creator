@@ -1,0 +1,9 @@
+.attribute-title {
+  text-align: right;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.attribute-value {
+  padding: 8px;
+}

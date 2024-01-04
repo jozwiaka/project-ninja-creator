@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>New champion</h2>
+
+<mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <input matInput placeholder="Name" [(ngModel)]="name" name="name" required>
+    </mat-form-field>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button class="btn btn-success" mat-button color="dark" (click)="save()">Ok</button>
+  <button class="btn btn-danger" mat-button (click)="cancel()">Cancel</button>
+</mat-dialog-actions>

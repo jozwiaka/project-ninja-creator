@@ -1,0 +1,28 @@
+.sidebar {
+  width: 150px;
+  background-color: #232323;
+  /* padding: 10px; */
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  padding-left: 10px;
+}
+
+.sidebar li {
+  cursor: pointer;
+  padding: 5px;
+  font-size: large;
+}
+
+.content-area {
+  flex: 1;
+  /* padding: 20px; */
+}
+
+.content-area h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}

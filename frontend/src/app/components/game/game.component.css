@@ -1,0 +1,220 @@
+.grid-container {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+.grid {
+  min-width: 483px;
+  min-height: 483px;
+  max-width: 483px;
+  max-height: 483px;
+  --columns-number: 8;
+  --rows-number: 8;
+  display: grid;
+  grid-template-columns: repeat(var(--columns-number), 40px);
+  grid-template-rows: repeat(var(--rows-number), 40px);
+  border: 2px solid white;
+}
+
+.row {
+  display: flex;
+}
+
+.tile {
+  margin-left: 12px;
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: #232323;
+  text-align: center;
+  cursor: pointer;
+  border: solid white 1px;
+}
+
+.tile.champion::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: solid white 2px;
+  background-color: black;
+}
+
+.tile.champion.player1::after {
+  background-color: darkred;
+}
+.tile.champion.player2::after {
+  background-color: darkviolet;
+}
+.tile.champion.player3::after {
+  background-color: darkorange;
+}
+.tile.champion.player4::after {
+  background-color: darkblue;
+}
+
+.tile.champion.preview::after {
+  opacity: 0.5;
+}
+
+.tile.champion.mirror::after {
+  background-color: aqua;
+}
+
+.tile.champion.invisiblee::after {
+  opacity: 0;
+}
+
+.tile.water{
+  background-color: lightskyblue;
+}
+
+.tile.rock{
+  background-color: brown;
+}
+
+.tile.targetable {
+  background-color: green;
+}
+
+.tile.spawned {
+  border: 6px solid aqua;
+}
+
+.tile.active {
+  border: 6px solid aqua;
+}
+
+.tile.selected {
+  border: 6px solid rgb(255, 0, 0);
+}
+
+.tile.chosen {
+  border: 6px solid rgb(0, 255, 0);
+}
+
+.table-container-horizontal {
+  overflow-x: auto;
+  overflow-y: hidden;
+  max-width: 404px;
+  width: 100%;
+  border: 1px solid white;
+  background-color: #232323;
+  max-height: 101px;
+}
+
+.scrollable-table-horizontal {
+  table-layout: fixed;
+  width: max-content;
+  /* border: 1px solid white; */
+}
+
+.scrollable-table-horizontal td {
+  width: 101px;
+  height: 101px;
+  border: 1px solid white;
+  padding: 0px;
+  background-color: rgb(64, 64, 64);
+}
+
+.table-container-vertical-passives {
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  max-height: 104px;
+  border: 1px solid white;
+}
+
+.table-container-vertical {
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  max-height: 304px;
+  border: 1px solid white;
+}
+
+.scrollable-table-vertical {
+  table-layout: fixed;
+  height: fit-content;
+  width: fit-content;
+  /* border: 1px solid white; */
+}
+
+.scrollable-table-vertical td {
+  width: 101px;
+  height: 101px;
+  border: 1px solid white;
+  padding: 0px;
+}
+
+.btn-cast {
+  padding: 0px;
+  margin: 0px;
+  margin-left: 0px;
+  width: 80px;
+  height: 60px;
+}
+
+.btn-cast-placeholder {
+  padding: 0px;
+  margin: 0px;
+  margin-left: 0px;
+  width: 80px;
+  height: 60px;
+}
+
+.btn-end {
+  margin: 0px;
+  margin-left: 0px;
+  margin-top: 20px !important;
+  width: 80px;
+  height: 30px;
+}
+
+.transparent {
+  opacity: 0.3;
+}
+
+.image-container {
+  position: relative;
+  display: inline-block; /* Ensures the container size adjusts to the image size */
+}
+
+.cooldown-timer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgb(0, 0, 0);
+  color: white;
+  padding: 4px;
+}
+
+.disabled-enemy-skill {
+  cursor: default;
+}
+
+.cell {
+  height: 131px;
+  width: 80px;
+  /* justify-content: center; */
+  align-items: center;
+  margin: 0px;
+  padding: 0px;
+}
+
+.container-right-panel {
+  min-height: 580px;
+  max-height: 580px;
+  /* min-width: 300px;
+  max-width: 300px; */
+}
+
+.container-end-of-turn {
+  display: flex;
+  justify-content: flex-end;
+}

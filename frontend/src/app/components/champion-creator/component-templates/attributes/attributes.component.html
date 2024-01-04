@@ -1,0 +1,240 @@
+<div class="container-flex-rows container-100vh" (click)="champion.calculateStatistics()">
+
+  <div class="container-wrap centre">
+    <table class="table">
+      <tbody>
+        <tr>
+          <td class="attribute-title">Vitality</td>
+          <td class="attribute-value">{{champion.attributes.vitality}}</td>
+          <td>+ {{champion.attributes.healthPerPoint}} HP (Health Points)
+          </td>
+          <td>
+            <ul>
+              <li>HP: {{champion.maxHealth}}</li>
+            </ul>
+          </td>
+          <td>
+            <div class="container-flex-cols">
+              <div>
+                <button class="btn btn-primary btn-circle" (click)="addVitalityPoint()" [ngClass]="{
+                invisible :checkIfVitalityCanBeIncremented()}">
+                  +</button>
+                <div>
+                  (-{{getCost(champion.attributes.vitality)}})
+                </div>
+              </div>
+              <div [ngClass]="{
+                invisible :checkIfVitalityCanBeDecremented()}">
+                <button class="btn btn-primary btn-circle" (click)="removeVitalityPoint()">
+                  -</button>
+                <div>
+                  (+{{getCostReturn(champion.attributes.vitality)}})
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="attribute-title">Concentration</td>
+          <td class="attribute-value">{{champion.attributes.concentration}}</td>
+          <td>+ {{champion.attributes.chakraPerPoint}} CP (Chakra Points)
+            <br>
+            + {{champion.attributes.chakraRegenPerPoint}} CR (Chakra Regeneration)
+          </td>
+          <td>
+            <ul>
+              <li>CP: {{champion.maxChakra}}</li>
+              <li>CR: {{champion.chakraRegen}}</li>
+            </ul>
+          </td>
+          <td>
+            <div class="container-flex-cols">
+              <div>
+                <button class="btn btn-primary btn-circle" (click)="addConcentrationPoint()" [ngClass]="{
+                invisible :checkIfConcentrationCanBeIncremented()}">
+                  +</button>
+                <div>
+                  (-{{getCost(champion.attributes.concentration)}})
+                </div>
+              </div>
+              <div [ngClass]="{
+                invisible :checkIfConcentrationCanBeDecremented()}">
+                <button class="btn btn-primary btn-circle" (click)="removeConcentrationPoint()">
+                  -</button>
+                <div>
+                  (+{{getCostReturn(champion.attributes.concentration)}})
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="attribute-title">Taijutsu</td>
+          <td class="attribute-value">{{champion.attributes.taijutsu}}</td>
+          <td>+ {{champion.attributes.taijutsuPowerPerPoint}} TP (Taijutsu Power)</td>
+
+          <td>
+            <ul>
+              <li>TP: {{champion.taijutsuPower}}</li>
+            </ul>
+          </td>
+          <td>
+            <div class="container-flex-cols">
+              <div>
+                <button class="btn btn-primary btn-circle" (click)="addTaijutsuPoint()" [ngClass]="{
+                invisible :checkIfTaijutsuCanBeIncremented()}">
+                  +</button>
+                <div>
+                  (-{{getCost(champion.attributes.taijutsu)}})
+                </div>
+              </div>
+              <div [ngClass]="{
+                invisible :checkIfTaijutsuCanBeDecremented()}">
+                <button class="btn btn-primary btn-circle" (click)="removeTaijutsuPoint()">
+                  -</button>
+                <div>
+                  (+{{getCostReturn(champion.attributes.taijutsu)}})
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="attribute-title">Ninjutsu</td>
+          <td class="attribute-value">{{champion.attributes.ninjutsu}}</td>
+          <td>+ {{champion.attributes.ninjutsuPowerPerPoint}} NP (Ninjutsu Power)</td>
+
+          <td>
+            <ul>
+              <li>NP: {{champion.ninjutsuPower}}</li>
+            </ul>
+          </td>
+          <td>
+            <div class="container-flex-cols">
+              <div>
+                <button class="btn btn-primary btn-circle" (click)="addNinjutsuPoint()" [ngClass]="{
+                invisible :checkIfNinjutsuCanBeIncremented()}">
+                  +</button>
+                <div>
+                  (-{{getCost(champion.attributes.ninjutsu)}})
+                </div>
+              </div>
+              <div [ngClass]="{
+                invisible :checkIfNinjutsuCanBeDecremented()}">
+                <button class="btn btn-primary btn-circle" (click)="removeNinjutsuPoint()">
+                  -</button>
+                <div>
+                  (+{{getCostReturn(champion.attributes.ninjutsu)}})
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="attribute-title">Speed</td>
+          <td class="attribute-value">{{champion.attributes.speed}}</td>
+          <td>+ {{champion.attributes.attackSpeedPerPoint}} AS (Attack Speed)</td>
+
+          <td>
+            <ul>
+              <li>AS: {{champion.attackSpeed}}</li>
+            </ul>
+          </td>
+          <td>
+            <div class="container-flex-cols">
+              <div>
+                <button class="btn btn-primary btn-circle" (click)="addSpeedPoint()" [ngClass]="{
+                invisible :checkIfSpeedCanBeIncremented()}">
+                  +</button>
+                <div>
+                  (-{{getCost(champion.attributes.speed)}})
+                </div>
+              </div>
+              <div [ngClass]="{
+                invisible :checkIfSpeedCanBeDecremented()}">
+                <button class="btn btn-primary btn-circle" (click)="removeSpeedPoint()">
+                  -</button>
+                <div>
+                  (+{{getCostReturn(champion.attributes.speed)}})
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="attribute-title">Movement</td>
+          <td class="attribute-value">{{champion.attributes.movement}}</td>
+          <td>+ {{champion.attributes.movementSpeedPerPoint}} MS (Movement Speed)</td>
+
+          <td>
+            <ul>
+              <li>MS: {{champion.movementSpeed}}</li>
+            </ul>
+          </td>
+          <td>
+            <div class="container-flex-cols">
+              <div>
+                <button class="btn btn-primary btn-circle" (click)="addMovementPoint()" [ngClass]="{
+                invisible :checkIfMovementCanBeIncremented()}">
+                  +</button>
+                <div>
+                  (-{{getCost(champion.attributes.movement)}})
+                </div>
+              </div>
+              <div [ngClass]="{
+                invisible :checkIfMovementCanBeDecremented()}">
+                <button class="btn btn-primary btn-circle" (click)="removeMovementPoint()">
+                  -</button>
+                <div>
+                  (+{{getCostReturn(champion.attributes.movement)}})
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="attribute-title">Defense</td>
+          <td class="attribute-value">{{champion.attributes.defense}}</td>
+          <td>
+            + {{champion.attributes.taijutsuResistancePerPoint}} TR (Taijutsu Resistance)
+            <br>
+            + {{champion.attributes.ninjutsuResistancePerPoint}} NR (Ninjutsu Resistance)
+          </td>
+          <td>
+            <ul>
+              <li>TR: {{champion.taijutsuResistance}} ({{this.champion.taijutsuDmgReductionPerc}}% Dmg
+                Reduction)</li>
+              <li>NR: {{champion.ninjutsuResistance}} ({{this.champion.ninjutsuDmgReductionPerc}}% Dmg
+                Reduction)</li>
+            </ul>
+          </td>
+          <td>
+            <div class="container-flex-cols">
+              <div>
+                <button class="btn btn-primary btn-circle" (click)="addDefensePoint()" [ngClass]="{
+                invisible :checkIfDefenseCanBeIncremented()}">
+                  +</button>
+                <div>
+                  (-{{getCost(champion.attributes.defense)}})
+                </div>
+              </div>
+              <div [ngClass]="{
+                invisible :checkIfDefenseCanBeDecremented()}">
+                <button class="btn btn-primary btn-circle" (click)="removeDefensePoint()">
+                  -</button>
+                <div>
+                  (+{{getCostReturn(champion.attributes.defense)}})
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div class="bottom-element">
+    <button (click)="reset()" class="btn btn-primary">Reset</button>
+  </div>
+</div>

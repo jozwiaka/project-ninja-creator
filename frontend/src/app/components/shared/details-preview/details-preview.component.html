@@ -1,0 +1,112 @@
+<div id="details">
+  <ng-container *ngIf="skill">
+    <h3>
+      <div class="skill-info">
+        <div class="chakra-cost">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-asterisk"
+            viewBox="0 0 16 16">
+            <path
+              d="M8 0a1 1 0 0 1 1 1v5.268l4.562-2.634a1 1 0 1 1 1 1.732L10 8l4.562 2.634a1 1 0 1 1-1 1.732L9 9.732V15a1 1 0 1 1-2 0V9.732l-4.562 2.634a1 1 0 1 1-1-1.732L6 8 1.438 5.366a1 1 0 0 1 1-1.732L7 6.268V1a1 1 0 0 1 1-1z" />
+          </svg>
+          {{skill.chakraCost}}
+          <ng-container *ngIf="skill.p_chakraCostPerPoint">
+            ({{pm(skill.p_chakraCostPerPoint)}})
+          </ng-container>
+        </div>
+        <div class="cooldown">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hourglass-top"
+            viewBox="0 0 16 16">
+            <path
+              d="M2 14.5a.5.5 0 0 0 .5.5h11a.5.5 0 1 0 0-1h-1v-1a4.5 4.5 0 0 0-2.557-4.06c-.29-.139-.443-.377-.443-.59v-.7c0-.213.154-.451.443-.59A4.5 4.5 0 0 0 12.5 3V2h1a.5.5 0 0 0 0-1h-11a.5.5 0 0 0 0 1h1v1a4.5 4.5 0 0 0 2.557 4.06c.29.139.443.377.443.59v.7c0 .213-.154.451-.443.59A4.5 4.5 0 0 0 3.5 13v1h-1a.5.5 0 0 0-.5.5zm2.5-.5v-1a3.5 3.5 0 0 1 1.989-3.158c.533-.256 1.011-.79 1.011-1.491v-.702s.18.101.5.101.5-.1.5-.1v.7c0 .701.478 1.236 1.011 1.492A3.5 3.5 0 0 1 11.5 13v1h-7z" />
+          </svg>
+          {{skill.cooldown}}
+          <ng-container *ngIf="skill.p_cooldownPerPoint">
+            ({{pm(skill.p_cooldownPerPoint)}})
+          </ng-container>
+        </div>
+        <div class="wait">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-square"
+            viewBox="0 0 16 16">
+            <path
+              d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+          </svg>
+          <ng-container *ngIf="skill.target==='none'">
+            0
+          </ng-container>
+          <ng-container *ngIf="skill.target!=='none'">
+            {{skill.castTime+1}}
+            <ng-container *ngIf="skill.p_castTimePerPoint">
+              ({{pm(skill.p_castTimePerPoint)}})
+            </ng-container>
+          </ng-container>
+        </div>
+
+        <div class="range">
+          <ng-container *ngIf="skill.target==='none'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+              fill="currentColor" class="bi bi-slash-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path d="M11.354 4.646a.5.5 0 0 0-.708 0l-6 6a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708z" />
+            </svg></ng-container>
+          <ng-container *ngIf="skill.target==='tile'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+              fill="currentColor" class="bi bi-check-square" viewBox="0 0 16 16">
+              <path
+                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+              <path
+                d="M10.97 4.97a.75.75 0 0 1 1.071 1.05l-3.992 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.235.235 0 0 1 .02-.022z" />
+            </svg></ng-container>
+          <ng-container *ngIf="skill.target==='self'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+              fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+              <path
+                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
+            </svg></ng-container>
+          <ng-container *ngIf="skill.target==='enemy'"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+              fill="currentColor" class="bi bi-check-circle" viewBox="0 0 16 16">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+              <path
+                d="M10.97 4.97a.235.235 0 0 0-.02.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05z" />
+            </svg></ng-container>
+          {{skill.range}}
+        </div>
+      </div>
+    </h3>
+
+    <div [ngClass]="{
+      line: skill
+    }">
+    </div>
+
+    <h3>
+      <div class="skill-info">
+        <div>{{skill.name}}</div>
+        <div>
+          <ng-container *ngFor="let i of Utils.inRange(skill.tier)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill"
+              viewBox="0 0 16 16">
+              <path
+                d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z" />
+            </svg>
+          </ng-container>
+        </div>
+      </div>
+    </h3>
+
+
+    <div [ngClass]="{
+      line: skill
+    }">
+    </div>
+
+    <div>
+      <img [src]=skill.imageUrl class="img-large">
+    </div>
+
+    <div [ngClass]="{
+    line: skill
+  }">
+    </div>
+
+    <div class="description">
+      <div class="description-item" *ngFor="let str of generateDescription()">{{str}}</div>
+    </div>
+  </ng-container>
+</div>
