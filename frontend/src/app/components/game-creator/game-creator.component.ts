@@ -1,11 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Champion } from 'src/app/common/entities/champion';
-import { SkillService } from 'src/app/services/skill.service';
-import { ChampionService } from 'src/app/services/champion.service';
-import { NONE_TYPE } from '@angular/compiler';
-import { MatDialog } from '@angular/material/dialog';
-import { AUTO } from 'phaser';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 
 interface Select {
@@ -37,11 +32,7 @@ export class GameCreatorComponent implements OnInit {
 
   constructor(
     private sharedDataService: SharedDataService,
-    private championService: ChampionService,
-    private skillService: SkillService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private matDialog: MatDialog
+    private router: Router
   ) {
     this.champions = this.sharedDataService.champions.map((champion) => {
       let c = new Champion();

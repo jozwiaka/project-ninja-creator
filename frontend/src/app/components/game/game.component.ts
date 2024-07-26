@@ -1,21 +1,15 @@
 // game.component.ts
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router, TitleStrategy } from '@angular/router';
-import { forkJoin } from 'rxjs';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { Skill } from 'src/app/common/entities/skill';
 import { Size } from 'src/app/common/geometry/size';
 import { Utils } from 'src/app/common/tools/utils';
-import { ChampionService } from 'src/app/services/champion.service';
-import { SkillService } from 'src/app/services/skill.service';
 import { Grid } from '../../common/board/grid';
 import { Tile } from '../../common/board/tile';
 import { Champion } from 'src/app/common/entities/champion';
 import { SharedDataService } from 'src/app/services/shared-data.service';
-import { Position } from 'src/app/common/geometry/position';
 import { MatDialog } from '@angular/material/dialog';
-import { ChampionCreatorComponent } from '../champion-creator/champion-creator.component';
 import { Status } from 'src/app/common/control/status';
-import { __asyncDelegator } from 'tslib';
 import { AffirmationComponent } from './dialogs/affirmation/affirmation.component';
 
 @Component({
@@ -54,12 +48,10 @@ export class GameComponent {
 
   constructor(
     private sharedDataService: SharedDataService,
-    private activatedRoute: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog
   ) {
-    // this.players = this.sharedDataService.championsInGame;
-    this.players = sharedDataService.champions;
+    this.players = this.sharedDataService.championsInGame;
     if (!this.players.length) {
       router.navigateByUrl('menu');
     } else {

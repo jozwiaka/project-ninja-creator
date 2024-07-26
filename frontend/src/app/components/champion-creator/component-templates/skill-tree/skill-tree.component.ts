@@ -1,8 +1,5 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/compiler';
-import { Component, Inject, OnInit, ViewEncapsulation } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { forkJoin } from 'rxjs';
 import { Champion } from 'src/app/common/entities/champion';
 import { Skill } from 'src/app/common/entities/skill';
 import { Tree } from 'src/app/common/entities/tree';
@@ -11,8 +8,6 @@ import { ChampionService } from 'src/app/services/champion.service';
 import { SharedDataService } from 'src/app/services/shared-data.service';
 import { SkillService } from 'src/app/services/skill.service';
 import { TreeService } from 'src/app/services/tree.service';
-import { MatDialog } from '@angular/material/dialog';
-import { Overlay } from '@angular/cdk/overlay';
 import { ChampionBackup } from 'src/app/common/backups/champion-backup';
 
 @Component({
